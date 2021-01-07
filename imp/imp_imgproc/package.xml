@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>imp_imgproc</name>
+  <description>
+    IMP imgproc module
+  </description>
+  <version>0.0.1</version>
+
+  <maintainer email="rebecq@ifi.uzh.ch">Henri Rebecq</maintainer>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>glog_catkin</depend>
+  <depend>ze_cmake</depend>
+  <depend>ze_common</depend>
+  <depend>imp_core</depend>
+  <depend>imp_bridge_opencv</depend> <!-- just a test dependency but QT indexing doesn't work with test_depend-->
+
+  <test_depend>gtest</test_depend>
+</package>

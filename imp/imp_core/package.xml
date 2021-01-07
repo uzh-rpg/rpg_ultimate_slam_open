@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>imp_core</name>
+  <description>
+    IMP core module
+  </description>
+  <version>0.1.4</version>
+
+  <maintainer email="rebecq@ifi.uzh.ch">Henri Rebecq</maintainer>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>ze_cmake</depend>
+  <depend>ze_common</depend>
+
+  <test_depend>gtest</test_depend>
+</package>

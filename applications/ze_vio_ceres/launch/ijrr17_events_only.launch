@@ -1,0 +1,41 @@
+<launch>
+  <arg name="bag_filename"   default="data/boxes_6dof.bag" />
+
+  <node name="ze_vio_ceres" pkg="ze_vio_ceres" type="ze_vio_ceres_node"
+    output="screen" required="true"
+    args="
+
+    --data_source=1  # rosbag
+    --bag_filename=$(find ze_vio_ceres)../../data/$(arg bag_filename)
+    --vio_use_events=1
+    --vio_use_events_and_images=0
+    --vio_rescale_intrinsics_for_distortion=true
+
+    --timeshift_cam_imu=0.0024 # IMU delay coming from low-pass filter
+    --calib_filename=$(find ze_vio_ceres)/../../calibration/DAVIS-IJRR17.yaml
+
+    --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
+    --flagfile=$(find ze_vio_ceres)/cfg/vio_davis.conf
+
+    --data_interval_between_event_packets=15000  # events-only pipeline: interval between successive event frames.
+    --data_use_time_interval=false  # events-only pipeline: if true, data_interval_between_event_packets is interpreted as milliseconds, otherwise as number of events
+
+    --data_size_augmented_event_packet=40000  # max number of events per event frame (should be >= vio_frame_size)
+    --vio_frame_size=15000  # each event frame will be drawn with that number of events
+    --vio_do_motion_correction=1
+    --noise_event_rate=20000
+    --vio_frame_norm_factor=4.0
+
+    --vio_trace_pose=False
+    --vmodule=feature_tracker=0
+    --colorlogtostderr=1
+    --logtostderr=1
+    --alsologtostderr=1
+    --vio_viz_feature_tracks=True
+    --vio_viz_feature_tracks_length=0
+    ">
+  </node>
+
+  <node name="visualisation" pkg="rviz" type="rviz" output="screen" args="-d $(find ze_visualization)/rviz/ze.rviz" />
+
+</launch>

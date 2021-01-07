@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>imp_bridge_ros</name>
+  <description>
+    IMP bridge to Ros adds the ability to interconnect with the Ros framework
+  </description>
+  <version>0.1.4</version>
+
+  <maintainer email="rebecq@ifi.uzh.ch">Henri Rebecq</maintainer>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>image_transport</depend>
+
+  <depend>ze_cmake</depend>
+  <depend>ze_common</depend>
+  <depend>imp_core</depend>
+  <depend>cv_bridge</depend>
+
+  <test_depend>gtest</test_depend>
+</package>

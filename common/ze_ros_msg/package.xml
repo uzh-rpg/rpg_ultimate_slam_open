@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ze_ros_msg</name>
+  <version>1.0.2</version>
+  <description>
+    ROS messages for Zurich Eye.
+  </description>
+  <maintainer email="rebecq@ifi.uzh.ch">Henri Rebecq</maintainer>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <test_depend>gtest</test_depend>
+
+</package>

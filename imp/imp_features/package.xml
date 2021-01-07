@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>imp_features</name>
+  <description>
+    IMP features module
+  </description>
+  <version>0.0.1</version>
+
+  <maintainer email="rebecq@ifi.uzh.ch">Henri Rebecq</maintainer>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>eigen_catkin</depend>
+  <depend>fast</depend>
+  <depend>glog_catkin</depend>
+  <depend>imp_imgproc</depend>
+  <depend>imp_bridge_opencv</depend>
+  <depend>ze_cmake</depend>
+  <depend>ze_common</depend>
+  <depend>ze_cameras</depend>
+
+  <test_depend>gtest</test_depend>
+</package>

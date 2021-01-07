@@ -1,0 +1,197 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{tensor}
+\author{Andreas Forster}
+\numberwithin{equation}{section}
+\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\vecs}[1]{\ensuremath{\boldsymbol{#1}}}
+\renewcommand{\deg}{\ensuremath{^\circ}}
+\newcommand{\norm}[1]{\ensuremath{\left|\left|#1\right|\right|}}
+\newcommand{\Exp}{\mathrm{Exp}}
+
+\renewcommand{\arraystretch}{1.5}
+%\setcounter{secnumdepth}{0}
+
+\begin{document}
+\section{Free Line Parametrization}
+A coordinate frame $L_i$ is defined with origin $\tensor[_W]{\vec{p}}{_L}$ on the line and with minimum distance $d_{L}$ to the frame origin. The $x$ axis is aligned with the line and the $z$ axis points away from the origin. The parametrization is as follows:
+\begin{equation}
+\vec{l} = \left[q_{WL}^T \quad d_L\right].
+\end{equation}
+The line anchor $\tensor[_W]{\vec{p}}{_L}$ can be calculated in the following way:
+\begin{equation}
+\tensor[_W]{\vec{p}}{_L} = q_{WL}\times\begin{bmatrix}
+0\\0\\d_L\end{bmatrix}
+\end{equation}
+And the line direction $\tensor[_W]{\vec{x}}{_L}$:
+\begin{equation}
+\tensor[_W]{\vec{x}}{_L} = q_{WL}\times\begin{bmatrix}1\\0\\0 \end{bmatrix}
+\end{equation}
+%
+\section{Measurement}
+Let $\vec{f}_1$ and $\vec{f}_2$ be the bearing vectors through the two endpoints of the detected line segment. $\tilde{\vec{n}} = \frac{\vec{f}_1\times\vec{f}_2}{\norm{\vec{f}_1\times\vec{f}_2}}$ is the normalized normal vector of the plane spanned by the two bearing vectors and defines our measurement.
+%
+\section{Error formulation}
+Given: Measurement $\tilde{\vec{n}}$ and line $\vec{l} = [q_{WL}^T\quad d_L]$.
+\subsection{Parallel constraint}
+The direction of the line is parallel to the plane defined with $\tilde{\vec{n}}$:
+\begin{equation}
+\varepsilon_1 = \tensor[_C]{\tilde{\vec{n}}}{^T}C_{CB}\hat{C}_{BW}\tensor[_W]{\vec{x}}{_L}.
+\end{equation}
+$\varepsilon_1$ is related to the angle $\delta\phi$ between plane and the line $\vec{l}$ in the following way:
+\begin{equation}
+\varepsilon_1 = \sin \delta\phi.
+\end{equation}
+\subsection{Distance constraint}
+The anchor point should be part of the measured plane. We define the second error term $\varepsilon_2$ as the sine of the angle between the bearing vectors through the anchor point and the projection of that point on the measured plane.  
+\begin{align}
+\varepsilon_2 &= \frac{\tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} \hat{C}_{BW} \left(\tensor[_W]{\hat{\vec{p}}}{_C} - \tensor[_W]{\vec{p}}{_L}\right)}{\norm{\tensor[_W]{\hat{\vec{p}}}{_C} - \tensor[_W]{\vec{p}}{_L}}}\\
+\tensor[_W]{\hat{\vec{p}}}{_C} &= -\left(\tensor[_W]{\hat{\vec{t}}}{_{CB}}+\tensor[_W]{\hat{\vec{t}}}{_{BW}}\right)\\ 
+&=-\left(\hat{C}_{WB} C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + 
+\hat{C}_{WB} \tensor[_B]{\hat{\vec{t}}}{_{BW}}\right)\\
+&=-\hat{C}_{WB} \left(C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + 
+\tensor[_B]{\hat{\vec{t}}}{_{BW}}\right)
+\end{align}
+\section{Jacobian w.r.t to $T_{BW}$}
+\begin{align}
+C_{BW} &\leftarrow C_{BW}\Exp(\vecs{\delta\phi})\\
+\tensor[_B]{\vec{t}}{_{BW}} &\leftarrow \tensor[_B]{\vec{t}}{_{BW}} + C_{BW}\vecs{\delta t}
+\end{align}
+\subsection{$\vecs{\varepsilon_1}$}
+\begin{align}
+\varepsilon_1 &= \tensor[_C]{\tilde{\vec{n}}}{^T}C_{CB} C_{BW}\Exp(\vecs{\delta\phi}) \tensor[_W]{\vec{x}}{_L}\\
+&\approx \tensor[_C]{\tilde{\vec{n}}}{^T}C_{CB} C_{BW}\tensor[_W]{\vec{x}}{_L} - \tensor[_C]{\tilde{\vec{n}}}{^T}C_{CB} C_{BW} \tensor[_W]{\vec{x}}{_L^\wedge}\vecs{\delta\phi}
+\end{align}
+\begin{align}
+\frac{\partial \varepsilon_1}{\partial\vecs{\delta\phi}} &= -\tensor[_C]{\tilde{\vec{n}}}{^T}C_{CB} C_{BW}\tensor[_W]{\vec{x}}{_L^\wedge}\\
+\frac{\partial \varepsilon_1}{\partial\vecs{\delta t}} &= \begin{bmatrix} 0&0&0 \end{bmatrix}
+\end{align}
+\subsection{$\vecs{\varepsilon_2}$}
+%
+%
+Let:
+\begin{equation}
+\vec{v} = \frac{\tensor[_W]{\hat{\vec{p}}}{_C} - \tensor[_W]{\vec{p}}{_L}}{\norm{\tensor[_W]{\hat{\vec{p}}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\end{equation}
+Then:
+\begin{align}
+\varepsilon_2 &= \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW} \Exp(\vecs{\delta\phi}) \vec{v}\\
+&\approx \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW} \vec{v} - \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW} \vec{v}^\wedge \vecs{\delta\phi}
+\end{align}
+\begin{align}
+\frac{\partial\varepsilon_2}{\partial\vecs{\delta\phi}} &= \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\frac{\partial \vec{v}}{\partial\vecs{\delta\phi}} - \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\vec{v}^\wedge\\
+\frac{\partial\varepsilon_2}{\partial\vecs{\delta t}} &= \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\frac{\partial\vec{v}}{\partial \vecs{\delta t}}
+\end{align}
+\begin{align}
+\frac{\partial\vec{v}}{\partial\vecs{\delta\phi}} &= \frac{\partial \vec{v}}{\partial\tensor[_W]{\vec{p}}{_C}} \frac{\partial \tensor[_W]{\vec{p}}{_{C}}}{\partial \vecs{\delta\phi}}\\
+\frac{\partial\vec{v}}{\partial\vecs{\delta t}} &= \frac{\partial \vec{v}}{\partial\tensor[_W]{\vec{p}}{_C}} \frac{\partial \tensor[_W]{\vec{p}}{_C}}{\partial \vecs{\delta t}} 
+\end{align}
+Some derivatives:
+\begin{align}
+\frac{d\norm{\vec{w}}}{d\vec{w}} &= \frac{1}{\norm{\vec{w}}}\vec{w}^T\\
+\frac{d\frac{1}{\norm{\vec{w}}}}{d\vec{w}} &= -\frac{1}{\norm{\vec{w}}^3}\vec{w}^T\\
+\frac{d\frac{\vec{w}}{\norm{\vec{w}}}}{d\vec{w}} &= \frac{1}{\norm{\vec{w}}}I - \frac{1}{\norm{\vec{w}}^3}\vec{w}\vec{w}^T\notag\\
+&= \frac{1}{\norm{\vec{w}}}\left(I - \frac{\vec{w}}{\norm{\vec{w}}}\left(\frac{\vec{w}}{\norm{\vec{w}}}\right)^T\right)
+\end{align}
+It follows:
+\begin{align}
+\frac{\partial \vec{v}}{\partial\tensor[_W]{\vec{p}}{_C}} &= 
+%\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}I
+%-\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}^3} (\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L})(\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L})^T\notag\\
+%&=\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+%\left( 
+%I - \frac{(\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L})(\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L})^T}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}^2}
+%\right)\\
+%&=
+\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\end{align}
+\subsubsection{Derivative of camera position w.r.t to $T_{BW}$}
+\begin{align}
+\tensor[_W]{\vec{p}}{_C} &= -\Exp(-\vecs{\delta\phi}) C_{WB} \left( C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + \left(\tensor[_B]{\vec{t}}{_{BW}} + C_{BW} \vecs{\delta t}\right)\right)\\
+&\approx -\left[C_{WB} \left( C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + \left(\tensor[_B]{\vec{t}}{_{BW}} + C_{BW} \vecs{\delta t}\right)\right)\right.\\
+&\left.\qquad-\vecs{\delta\phi}^\wedge C_{WB} \left( C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + \left(\tensor[_B]{\vec{t}}{_{BW}} + C_{BW} \vecs{\delta t}\right)\right)\right]\\
+&\approx -C_{WB} \left( C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + \left(\tensor[_B]{\vec{t}}{_{BW}} + C_{BW} \vecs{\delta t}\right)\right)\\
+&\qquad+\vecs{\delta\phi}^\wedge C_{WB} \left( C_{BC} \tensor[_C]{\vec{t}}{_{CB}} + \left(\tensor[_B]{\vec{t}}{_{BW}} + C_{BW} \vecs{\delta t}\right)\right)\\
+%
+&\approx -(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}} + \vecs{\delta t})
++ \vecs{\delta\phi}^\wedge\left(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}} + \vecs{\delta t}\right)\\
+&\approx -(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}} + \vecs{\delta t})
+- \left(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}} + \vecs{\delta t}\right)^\wedge\vecs{\delta\phi}\\
+%
+%&\approx-\left(\tensor[_W]{\vec{t}}{_{CB}}+\tensor[_W]{\vec{t}}{_{CB}^\wedge}\vecs{\delta\phi}\right) - \left(\tensor[_W]{\vec{t}}{_{BW}} + \vecs{\delta t} + \tensor[_W]{\vec{t}}{_{BW}^\wedge}\vecs{\delta\phi} +\vecs{\delta t}^\wedge\vecs{\delta\phi}\right)
+\end{align}
+\begin{align}
+\frac{\partial\tensor[_W]{\vec{p}}{_C}}{\partial\vecs{\delta\phi}} &= -(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}})^\wedge\\
+\frac{\partial\tensor[_W]{\vec{p}}{_C}}{\partial\vecs{\delta t}} &= -I
+\end{align}
+\subsubsection{Full jacobian}
+\begin{align}
+\frac{\partial\varepsilon_2}{\partial\vecs{\delta\phi}} &= \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\frac{\partial \vec{v}}{\partial\vecs{\delta\phi}} - \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\vec{v}^\wedge\\
+&= \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\frac{\partial \vec{v}}{\partial\tensor[_W]{\vec{p}}{_C}} 
+\frac{\partial \tensor[_W]{\vec{p}}{_{C}}}{\partial \vecs{\delta\phi}}
+ - \tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\vec{v}^\wedge\\
+&= \tensor[_W]{\tilde{\vec{n}}}{^T}
+\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\frac{\partial \tensor[_W]{\vec{p}}{_{C}}}{\partial \vecs{\delta\phi}}
+ - \tensor[_W]{\tilde{\vec{n}}}{^T} \vec{v}^\wedge\\
+ &= \frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}\tensor[_W]{\tilde{\vec{n}}}{^T}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\left(-(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}})^\wedge\right)
+ - \tensor[_W]{\tilde{\vec{n}}}{^T} \vec{v}^\wedge\\
+ &=\frac{-1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}\tensor[_W]{\tilde{\vec{n}}}{^T}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\left(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}}\right)^\wedge
+ - \tensor[_W]{\tilde{\vec{n}}}{^T} \vec{v}^\wedge\\
+&=-\tensor[_W]{\tilde{\vec{n}}}{^T}\left(\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\left(\tensor[_W]{\vec{t}}{_{CB}} + \tensor[_W]{\vec{t}}{_{BW}}\right)^\wedge + \vec{v}^\wedge\right)
+\end{align}
+\begin{align}
+\frac{\partial\varepsilon_2}{\partial\vecs{\delta t}} &= 
+\tensor[_C]{\tilde{\vec{n}}}{^T} C_{CB} C_{BW}\frac{\partial\vec{v}}{\partial \vecs{\delta t}}\\
+&= 
+\tensor[_W]{\tilde{\vec{n}}}{^T} 
+\frac{\partial \vec{v}}{\partial\tensor[_W]{\vec{p}}{_C}}
+\frac{\partial \tensor[_W]{\vec{p}}{_C}}{\partial \vecs{\delta t}}\\
+&=
+\tensor[_W]{\tilde{\vec{n}}}{^T} 
+\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\frac{\partial \tensor[_W]{\vec{p}}{_C}}{\partial \vecs{\delta t}}\\
+&=
+\frac{1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\tensor[_W]{\tilde{\vec{n}}}{^T}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+(-I)\\
+&=\frac{-1}{\norm{\tensor[_W]{\vec{p}}{_C} - \tensor[_W]{\vec{p}}{_L}}}
+\tensor[_W]{\tilde{\vec{n}}}{^T}
+\left(
+I - \vec{v}\vec{v}^T
+\right)
+\end{align}
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography_lines}
+
+\end{document}

@@ -1,0 +1,22 @@
+macro(ze_debug)
+  string(REPLACE ";" " " __msg "${ARGN}")
+  message(STATUS "${__msg}")
+endmacro()
+
+macro(ze_warn)
+  string(REPLACE ";" " " __msg "${ARGN}")
+  message(WARNING "${__msg}")
+endmacro()
+
+macro(ze_fatal)
+  string(REPLACE ";" " " __msg "${ARGN}")
+  message(FATAL_ERROR "${__msg}")
+endmacro()
+
+macro(ze_include)
+  #ze_debug("[MACRO] ze_include( ${ARGN} )")
+  include_directories(${ARGN})
+  if (WITH_CUDA AND CUDA_FOUND)
+    cuda_include_directories(${ARGN})
+  endif()
+endmacro()

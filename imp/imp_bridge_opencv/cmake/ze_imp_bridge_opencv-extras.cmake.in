@@ -1,0 +1,2 @@
+list(INSERT ZE_LIBRARIES 0 "@OpenCV_LIBS@")
+

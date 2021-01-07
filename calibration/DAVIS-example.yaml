@@ -1,0 +1,53 @@
+label: "DAVIS-example"
+id: davis-example
+cameras:
+- camera:
+    label: dvs
+    id: 0
+    line-delay-nanoseconds: 0
+    image_height: 180
+    image_width: 240
+    type: pinhole
+    intrinsics:
+      cols: 1
+      rows: 4
+      data: [197.8896180156088, 197.77682212558196, 130.67973405379294, 111.1614965931138]
+    distortion:
+      type: equidistant
+      parameters:
+        cols: 1
+        rows: 4
+        data: [-0.07990900260889204, 0.14676572847248792, -0.23207155168801544,
+    0.13338013034315513]
+  T_B_C:
+    cols: 4
+    rows: 4
+    data: [0.99992201, -0.01064369, -0.00653412,  0.00064629,
+         0.01064543,  0.99994331,  0.00023224,  0.0094547,
+         0.00653128, -0.00030178,  0.99997863,  0.05058314,
+          0.0, 0.0, 0.0, 1.0]
+- camera:
+    label: standard
+    id: 1
+    line-delay-nanoseconds: 0
+    image_height: 180
+    image_width: 240
+    type: pinhole
+    intrinsics:
+      cols: 1
+      rows: 4
+      data: [197.8896180156088, 197.77682212558196, 130.67973405379294, 111.1614965931138]
+    distortion:
+      type: equidistant
+      parameters:
+        cols: 1
+        rows: 4
+        data: [-0.07990900260889204, 0.14676572847248792, -0.23207155168801544,
+    0.13338013034315513]
+  T_B_C:
+    cols: 4
+    rows: 4
+    data: [0.99992201, -0.01064369, -0.00653412,  0.00064629,
+         0.01064543,  0.99994331,  0.00023224,  0.0094547,
+         0.00653128, -0.00030178,  0.99997863,  0.05058314,
+          0.0, 0.0, 0.0, 1.0]

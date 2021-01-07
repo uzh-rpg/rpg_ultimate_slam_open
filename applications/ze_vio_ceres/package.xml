@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ze_vio_ceres</name>
+  <version>0.0.1</version>
+  <description>
+    ze_vio_ceres
+  </description>
+  <maintainer email="rebecq@ifi.uzh.ch">Henri Rebecq</maintainer>
+  <license>tbd</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <depend>ze_ceres_backend</depend>
+  <depend>ze_vio_frontend</depend>
+
+  <test_depend>gtest</test_depend>
+</package>

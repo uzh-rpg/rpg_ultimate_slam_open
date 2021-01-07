@@ -1,0 +1,8 @@
+if(ZE_USE_BRISK)
+  find_package(brisk REQUIRED)
+  message(STATUS "BRISK found.")
+  message(STATUS "BRISK libraries: ${brisk_LIBRARIES}")
+  message(STATUS "BRISK headers: ${brisk_INCLUDE_DIRS}")
+  list(APPEND catkin_LIBRARIES  ${brisk_LIBRARIES})
+  include_directories(${brisk_INCLUDE_DIRS})
+endif()
