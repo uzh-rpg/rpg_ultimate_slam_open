@@ -382,7 +382,7 @@ struct MapPoint
 
 typedef std::vector<MapPoint, Eigen::aligned_allocator<MapPoint> > MapPointVector;
 typedef std::map<BackendId, MapPoint, std::less<BackendId>,
-                 Eigen::aligned_allocator<MapPoint> > PointMap;
+                 Eigen::aligned_allocator<std::pair<const BackendId, MapPoint>> > PointMap;
 
 //------------------------------------------------------------------------------
 // [velocity, gyro biases, accel biases]

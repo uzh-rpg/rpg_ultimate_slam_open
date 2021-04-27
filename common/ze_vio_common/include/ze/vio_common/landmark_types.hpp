@@ -36,7 +36,7 @@ struct LandmarkObs
 using LandmarkObsVec =
   std::vector<LandmarkObs, Eigen::aligned_allocator<LandmarkObs>>;
 using KeypointsVec =
-  std::vector<Keypoint, Eigen::aligned_allocator<LandmarkObs>>;
+  std::vector<Keypoint, Eigen::aligned_allocator<Keypoint>>;
 
 std::ostream& operator<<(std::ostream& out, const LandmarkObs& obs);
 std::ostream& operator<<(std::ostream& out, const LandmarkObsVec& obs_vec);

@@ -549,7 +549,7 @@ class Estimator
   BackendId reference_pose_id_; ///< The pose ID of the reference (currently not changing)
 
   // the following are updated after the optimization
-  ze::PointMap landmarks_map_; ///< Contains all the current landmarks (synched after optimisation).
+  PointMap landmarks_map_; ///< Contains all the current landmarks (synched after optimisation).
   mutable std::mutex landmarks_mutex_;  ///< Regulate access of landmarksMap_.
 
   // parameters

@@ -13,7 +13,7 @@ include(ze_setup)
 set(HEADERS
   include/imp/bridge/opencv/cv_connector_pixel_types.hpp
   include/imp/bridge/opencv/image_cv.hpp
-  include/imp/bridge/opencv/cv_bridge.hpp
+  include/imp/bridge/opencv/cv_bridge.h
   include/imp/bridge/opencv/cu_cv_bridge.hpp
   )
 

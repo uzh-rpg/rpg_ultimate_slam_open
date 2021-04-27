@@ -19,13 +19,13 @@ void cvBridgeLoad(ImageCvPtr<Pixel>& out,
   cv::Mat mat;
   if (pixel_order == PixelOrder::gray)
   {
-    mat = cv::imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
+    mat = cv::imread(filename, cv::IMREAD_GRAYSCALE);
     CHECK(!mat.empty());
   }
   else
   {
     // everything else needs color information :)
-    mat = cv::imread(filename, CV_LOAD_IMAGE_COLOR);
+    mat = cv::imread(filename, cv::IMREAD_COLOR);
     CHECK(!mat.empty());
   }
 
@@ -39,14 +39,14 @@ void cvBridgeLoad(ImageCvPtr<Pixel>& out,
     else
     {
       out = std::make_shared<ImageCv<Pixel>>(mat.cols, mat.rows);
-      cv::cvtColor(mat, out->cvMat(), CV_BGR2GRAY);
+      cv::cvtColor(mat, out->cvMat(), cv::COLOR_BGR2GRAY);
     }
   break;
   case PixelType::i32fC1:
     out = std::make_shared<ImageCv<Pixel>>(mat.cols, mat.rows);
     if (mat.channels() > 1)
     {
-      cv::cvtColor(mat, mat, CV_BGR2GRAY);
+      cv::cvtColor(mat, mat, cv::COLOR_BGR2GRAY);
     }
     mat.convertTo(out->cvMat(), CV_32F, 1./255.);
   break;
@@ -76,7 +76,7 @@ void cvBridgeShow(const std::string& winname, const ImageCv<Pixel>& img,
   {
     int mat_type = (img.nChannels() > 1) ? CV_8UC3 : CV_8UC1;
     cv::Mat norm_mat(img.height(), img.width(), mat_type);
-    cv::normalize(img.cvMat(), norm_mat, 0, 255, CV_MINMAX, CV_8U);
+    cv::normalize(img.cvMat(), norm_mat, 0, 255, CV_MMX, CV_8U);
     cv::imshow(winname, norm_mat);
   }
   else

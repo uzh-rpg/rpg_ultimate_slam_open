@@ -451,32 +451,32 @@ void VioVisualizer::displayFrameImageWithStatistics(
         Keypoint px1 = track[i-1] * scale;
         cv::line(img_rgb,
                  cv::Point2f(px0(0), px0(1)),
-                 cv::Point2f(px1(0), px1(1)), color, 1, CV_AA);
+                 cv::Point2f(px1(0), px1(1)), color, 1, cv::LINE_AA);
       }
     }
 
     if (lm_type == LandmarkType::Seed || lm_type == LandmarkType::SeedConverged)
     {
       color = cv::Scalar(255,255,0);
-      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, color, 1, CV_AA);
+      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, color, 1, cv::LINE_AA);
       ++n_seed;
     }
     else if (lm_type == LandmarkType::Opportunistic
              && landmarks.numSuccessfulProjections(lm_h) > 0)
     {
       color = cv::Scalar(0,255,255); // Yellow
-      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, color, 1, CV_AA);
+      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, color, 1, cv::LINE_AA);
       ++n_opportunistic;
     }
     else if (lm_type == LandmarkType::OpportunisticAbsorbed)
     {
       color = cv::Scalar(255,0,255); // Magenta.
-      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, color, 1, CV_AA);
+      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, color, 1, cv::LINE_AA);
       ++n_opportunistic;
     }
     else if (lm_type == LandmarkType::Persistent)
     {
-      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, cv::Scalar(0, 255, 0), -1, CV_AA);
+      cv::circle(img_rgb, cv::Point2f(px(0), px(1)), 3, cv::Scalar(0, 255, 0), -1, cv::LINE_AA);
       ++n_persistent;
     }
   }
