@@ -77,13 +77,13 @@ public:
    * Returns the reader condition variable.
    * Useful for external synchronization schemes.
    **/
-  ConditionVariable& readerConditionVariable() const { return read_cond_; }
+  ConditionVariable& readerConditionVariable() { return read_cond_; }
 
   /*!
    * Returns the writer condition variable.
    * Useful for external synchronization schemes.
    **/
-  ConditionVariable& writerConditionVariable() const { return write_cond_; }
+  ConditionVariable& writerConditionVariable() { return write_cond_; }
 
   /*!
    * @name Status

@@ -43,7 +43,7 @@ class Buffer
 {
 public:
   using Vector = Eigen::Matrix<Scalar, Dim, 1>;
-  using VectorBuffer = std::map<int64_t, Vector, std::less<int64_t>, Eigen::aligned_allocator<Vector>>;
+  using VectorBuffer = std::map<int64_t, Vector, std::less<int64_t>, Eigen::aligned_allocator<std::pair<const int64_t, Vector>>>;
 
   static constexpr int kDim = Dim;
 
