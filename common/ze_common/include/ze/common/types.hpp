@@ -26,7 +26,6 @@
 #pragma once
 
 #include <cstdint>
-#include <cstddef>
 #pragma diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 // Eigen 3.2.7 uses std::binder1st and std::binder2nd which are deprecated since c++11

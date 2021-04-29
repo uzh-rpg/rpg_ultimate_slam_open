@@ -31,7 +31,6 @@
 #include <vector>
 #include <string>
 
-
 #include <ze/common/logging.hpp>
 
 //! @file string_utilties.hpp
