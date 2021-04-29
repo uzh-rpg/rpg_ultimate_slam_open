@@ -13,19 +13,19 @@ repositories:
     version: master
   glog_catkin:
     type: git
-    url: git@github.com:zurich-eye/glog_catkin.git
+    url: git@github.com:ethz-asl/glog_catkin.git
     version: master
   gflags_catkin:
     type: git
-    url: git@github.com:zurich-eye/gflags_catkin.git
+    url: git@github.com:ethz-asl/gflags_catkin.git
     version: master
   eigen_catkin:
     type: git
-    url: git@github.com:zurich-eye/eigen_catkin.git
+    url: git@github.com:ethz-asl/eigen_catkin.git
     version: master
   eigen_checks:
     type: git
-    url: git@github.com:zurich-eye/eigen_checks.git
+    url: git@github.com:ethz-asl/eigen_checks.git
     version: master
   minkindr:
     type: git
