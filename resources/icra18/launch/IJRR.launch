@@ -1,0 +1,37 @@
+<launch>
+  <arg name="data_dir" default="/media/$(env USER)/Samsung_T3/DVS_dataset_IJRR" />
+  
+  <arg name="dataset_name" />
+  <arg name="camera_name" default="DAVIS-IJRR17" />
+  
+  <node name="ze_vio_ceres" pkg="ze_vio_ceres" type="ze_vio_ceres_node"
+        output="screen" required="true"
+        args="
+          --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
+          --flagfile=$(find ze_vio_ceres)/cfg/vio_davis.conf
+          --flagfile=$(find 2017BMVC_ZEVIO)/cfg/$(arg dataset_name).conf
+          
+          --data_source=1
+          --bag_filename=$(arg data_dir)/$(arg dataset_name).bag
+          --calib_filename=$(find rpg_calib)/zurich_eye/$(arg camera_name).yaml
+          
+          --vio_trace_pose=True
+          --log_dir=$(find 2017BMVC_ZEVIO)/results/final/$(arg dataset_name)
+          
+          --vio_feature_tracker_patch_size_by8=2
+          --vio_ceres_iterations=1
+          
+          --acc_noise_density=.15
+  ">
+  </node>
+  
+  <node name="visualisation" pkg="rviz" type="rviz" output="screen" args="-d $(find ze_visualization)/rviz/ze.rviz" >
+    <remap from="image" to="/dvs/image_raw" />
+  </node>
+  
+ <node name="snakify" pkg="rpg_common_ros" type="snakify.py" output="screen" >
+   <param name="frame_id" value="body" />
+   <param name="length" value="300" />
+ </node>
+  
+</launch>

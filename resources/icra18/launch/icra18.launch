@@ -1,0 +1,107 @@
+<launch>
+  <arg name="data_dir" default="$(find ze_vio_ceres)../../data" />
+  <arg name="bag_filename"                      default="debug_davis_84010032" />
+  <arg name="camera_name"                       default="DAVIS-IJRR17_updated" />
+  <arg name="use_events"                        default="0" />
+  <arg name="use_events_and_images"             default="1" />
+  <arg name="verbosity"                         default="0" />
+  <arg name="rate_bag"                          default="0.1" />
+  <arg name="use_time_window"                   default="0" />
+
+  <param name="use_sim_time" value="1"/>
+
+  <!--
+  <node pkg="rosbag" type="play" name="player" required="True"
+    args="-r $(arg rate_bag)
+          -d 4.
+          -s 0.0
+          $(find ze_vio_ceres)../../data/$(arg bag_filename).bag -\-clock" />
+  -->
+
+  <arg unless="$(arg use_events_and_images)" name="vio_mode" default="images"/>
+  <arg if="$(arg use_events_and_images)"     name="vio_mode" default="events_and_images"/>
+
+  <node name="ze_vio_ceres" pkg="ze_vio_ceres" type="ze_vio_ceres_node"
+    output="screen" required="true"
+    args="
+
+    #######
+
+    --vio_delayed_nframe_processing=False
+    #--vio_ceres_block_frontend=True
+    #--vio_use_input_queue=False
+
+    --vio_use_5pt_ransac=False
+
+    --vio_viz_feature_tracks=True
+    --vio_viz_feature_tracks_colormap=0
+    --vio_viz_feature_tracks_length=0
+    --vio_viz_show_image=False
+
+    --vio_min_depth=0.05
+    #######
+
+    #######
+
+    --imp_detector_grid_size=32
+    # reduce the grid size, to see if it improves
+    # Features are not evenly distributed
+    # Average life expectancy?
+    --imp_detector_name=FAST
+    --imp_detector_border_margin=5
+    --imp_detector_threshold=50
+    --vio_descriptor_use_dummy=True
+
+    --vio_kfselect_numfts_lower_thresh=30
+    --vio_add_every_nth_frame_to_backend=1
+    --vio_feature_tracker_patch_size_by8=3,2
+    --imp_detector_max_features_per_frame=100
+
+    --data_size_augmented_event_packet=20000
+    #--data_use_time_interval=true
+    #--data_interval_between_event_packets=33
+    #--vio_use_integration_time=false
+    --vio_frame_size=20000
+
+    --noise_event_rate=10000
+
+    --vio_feature_tracker_termcrit_min_update_squared=0.1
+
+    --vio_viz_level=1
+    --vio_viz_skip_rate=2
+    
+    #######
+
+    --calib_filename=$(find ze_vio_ceres)/../../calibration/DAVIS-IJRR17.yaml
+    --timeshift_cam_imu=0.00266944159539
+    
+
+    ###### CUSTOMS #####
+
+    ###### NON-PERFORMANCE RELATED PARAMS ##########
+    --colorlogtostderr=1
+    --logtostderr=1
+    --alsologtostderr=1
+    --v=$(arg verbosity)
+
+    --vio_use_events=$(arg use_events)
+    --vio_use_events_and_images=$(arg use_events_and_images)
+
+    --data_source=1
+    --bag_filename=$(arg data_dir)/$(arg bag_filename).bag
+    --topic_cam0=/dvs/image_raw
+    --topic_dvs0=/dvs/events
+    --topic_imu0=/dvs/imu
+
+    --vio_trace_pose=False
+    ">
+  </node>
+
+  <node name="visualisation" pkg="rviz" type="rviz" output="screen" args="-d $(find ze_visualization)/rviz/ze.rviz"/>
+
+  <!--<node name="pos_vel_plot"-->
+    <!--pkg="rqt_plot"-->
+    <!--type="rqt_plot"-->
+    <!--args="/ze_vio/T_M_B/pose/position \-->
+          <!--/ze_vio/T_M_B/pose/orientation" />-->
+</launch>
