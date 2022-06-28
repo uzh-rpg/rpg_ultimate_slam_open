@@ -7,8 +7,8 @@
 </p>
 
 This repository contains code to run Ultimate SLAM, described in the following two papers:  
-- [Ultimate SLAM? Combining Events, Images, and IMU for Robust Visual SLAM in HDR and High Speed Scenarios](http://rpg.ifi.uzh.ch/docs/RAL18_VidalRebecq.pdf) 
-- [Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization](http://rpg.ifi.uzh.ch/docs/BMVC17_Rebecq.pdf)
+- [Ultimate SLAM? Combining Events, Images, and IMU for Robust Visual SLAM in HDR and High Speed Scenarios, IEEE Robotics and Automation Letters, 2018.](http://rpg.ifi.uzh.ch/docs/RAL18_VidalRebecq.pdf) 
+- [Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization, British Machine Vision Conference, 2017](http://rpg.ifi.uzh.ch/docs/BMVC17_Rebecq.pdf)
 
 If you use this code in an academic context, please cite the following works:
 
