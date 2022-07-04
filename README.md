@@ -1,7 +1,7 @@
 # Ultimate SLAM
 
 <p align="center">
-    <a href="https://youtu.be/jIvJuWdmemE">
+    <a href="https://youtu.be/0hDGFFJQfmA">
         <img src="./resources/lasso.gif" alt="UltimateSlam"/>
     </a>
 </p>
