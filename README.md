@@ -4,8 +4,6 @@
     <a href="https://youtu.be/0hDGFFJQfmA">
         <img src="./resources/lasso.gif" alt="UltimateSlam"/>
     </a>
-    
-    [Check out the video presentation!](https://youtu.be/0hDGFFJQfmA)
 </p>
 
 This repository contains code to run Ultimate SLAM, described in the following two papers:  
