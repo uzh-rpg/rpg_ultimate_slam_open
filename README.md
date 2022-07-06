@@ -31,6 +31,8 @@ If you use this code in an academic context, please cite the following works:
   year = {2017}
 }
 ```
+## Motivation
+Event cameras are bioinspired vision sensors that output pixel-level brightness changes instead of standard intensity frames. Event cameras do not suffer from motion blur and have a very high dynamic range, which enables them to provide reliable visual information during high-speed motions or in scenes characterized by high dynamic range. However, event cameras output only a little information when the amount of motion is limited, such as in the case of almost still motion. Conversely, standard cameras provide instant and rich information about the environment most of the time (in low-speed and good lighting scenarios), but they fail severely in case of fast motions, or difficult lightings such as high dynamic range or low light scenes. UltimateSLAM is the first state estimation pipeline that leverages the complementary advantages of these two sensors by fusing in a tightly coupled manner events, standard frames, and inertial measurements. In high-speed and high-dynamic-range scenarios, UltimateSLAM leads to an accuracy improvement of up to 85% over standard frame-based visual-inertial odometry systems and can run in real-time on embedded platforms. We have shown that UltimateSLAM can be used for autonomous drone flight in low-lit environments and even to keep drones flying when a rotor fails ([video](https://youtu.be/Ww8u0KH7Ugs)).
 
 ## Contents
 - [Installation of UltimateSLAM](docs/Installation-of-UltimateSLAM.md)
